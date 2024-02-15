@@ -1,0 +1,158 @@
+* { 
+    font-family: Montserrat,arial;
+ }
+ body {
+    
+     width: 100%;
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;  
+ }
+ 
+.EstiloLink {
+     text-decoration: none;
+     color: #1D1F2D;
+     font-size: 12px;
+ }
+
+.EstiloPLink {
+color: 808288;
+font-size: 12px;
+}
+
+ .boton1 {
+    width: 190.93px;
+    height: 50px;
+    font-size: 13px;
+    left: 0px;
+    top: 0px;
+    font-weight: 700;
+    background: #1D1F2D;
+    color: white;
+}
+
+
+.boton1:hover {
+
+    background: #20274B;
+}
+
+
+#SeccionProductos .card {
+    border: none;
+    margin: 0px 10px 0px 10px;
+    height: 443px;
+    border: 2px solid transparent;
+    border-width: 1px;
+}
+
+#SeccionProductos h2 {
+text-align: center;
+margin-top: 50px;
+font-size: 20px;
+font-weight: 700;
+margin-bottom: 25px;
+}
+
+#SeccionProductos .card:hover {
+    border-color: #1D1F2D;
+    
+}
+
+#SeccionProductos .boton1 {
+    width: 308px;
+    height: 42px;
+    text-align: center;
+}
+
+.card-title, .card-text {
+    margin-top:  10px;
+    margin-bottom:  20px;
+}
+
+.Contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.hrEstilo {
+            margin: auto;
+    }
+
+.linea {
+    display:  flex;
+}
+.linea p {
+    color: #1D1F2D;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.linea h1 {
+color: #1D1F2D;
+font-size: 24px;
+font-weight: 700;
+}
+
+.contenedor-general {
+    max-width: 1440px; /* Por ejemplo, establece un ancho máximo para el contenedor */
+    margin: 0 auto; 
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.ContenidoAlineado{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.ContenidoAlineado p {
+ margin-top:20px;
+ font-size: 14px;
+}
+
+.rotar-flechas {
+    transform: rotate(90deg); 
+}
+
+.epacioMargin {
+   margin-top: 30px;
+   margin-bottom: 60px;
+}
+
+.rotar-Dobleflechas {
+    transform: rotate(180deg); 
+}
+
+.card-img-top {
+    width: 100%; 
+    height: 300px; 
+    object-fit: cover; 
+}
+
+.margin-auto{
+margin: 0 auto;
+}
+
+.align-center button{
+align-items: center;
+}
+
+
+.contenidoFlechas{
+    display: flex;
+    align-items: center;
+}
+
+.contenidoFlechas img,
+.contenidoFlechas p {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.marginTexto{
+margin-left: 30px;
+margin-right: 120px;
+}
+

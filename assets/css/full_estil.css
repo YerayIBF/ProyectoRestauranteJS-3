@@ -1,0 +1,21 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* FONTS */
+@font-face {
+    font-family: "BlantickScript";
+    src: url(../fonts/BlantickScript.ttf);
+}
+
+:root,
+[data-bs-theme=light] {
+    --bs-negro: #000000;
+    --bs-blanco: #FFFFFF;
+    --bs-negro-Azul: #1D1F2D;
+    --bs-AzulOscuro: #20274B;
+    --bs-gris-claro: #D2D7DC;
+    --bs-gris-blanco: #F5F5F5;
+    --bs-gris: #C6C7CE;
+}
+
+

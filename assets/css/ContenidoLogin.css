@@ -1,0 +1,74 @@
+* { 
+    font-family: Montserrat, arial;
+ }
+ body {
+    
+     width: 100%;
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;  
+ }
+ 
+ a {
+     text-decoration: none;
+     
+ }
+
+ .fuenteh1  {
+    font-weight:  700;
+    font-size:  24px ;
+    margin-bottom: 30px;
+    margin-top: 30px;
+ }
+
+ #IDUsuario{
+    border-color: #1d1f2d;
+    border-width: 1px;
+    margin-bottom:   15px;
+    width: 449px;
+    height: 42;
+ }
+
+ #IDContraseña{
+    border-color: #1d1f2d;
+    border-width: 1px;
+    margin-top:  15px;
+    margin-bottom:   15px;
+    width: 449px;
+    height: 42;
+ }
+
+form .form-check{
+    margin-bottom: 15px;
+}
+
+.FormularioContenedor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .BotonForm {
+    width: 449px;
+    height: 50px;
+    font-size: 13px;
+    left: 0px;
+    top: 0px;
+    font-weight: 700;
+    background: #1D1F2D;
+    color: white;
+}
+
+
+.BotonForm:hover {
+
+    background: #20274B;
+}
+
+.ajusteMargin {
+    padding-top: 200px;
+}
+.form-group{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

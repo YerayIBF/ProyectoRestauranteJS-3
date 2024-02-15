@@ -1,0 +1,131 @@
+
+/**
+--------------------------------------------
+           Seccion del Header 
+--------------------------------------------
+*/
+
+.HeadSup {
+    z-index: 2000;
+    font-size: 12px;
+    background-color: #C6C7CE;
+    width: 100%;
+    height: 35px; 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.HeadSup p {
+    margin-top: 15px;
+    align-items: center;
+}
+.HeadSup img {
+    margin-right: 5px;
+    width: 20px;
+}
+.HeadMed {
+    padding-right: 50px;
+    font-size: 12px;
+    background-color: #F5F5F5;
+    height: 30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+.HeadMed p {
+    align-items: center;
+  margin: 0px 15px 0px 15px;
+
+}
+
+.navbar {
+   
+    width: 100%;
+    background-color: #FFFFFF;
+
+}
+.HeaderScroll {
+  z-index: 1000;
+  position: sticky;
+  top: 0;
+  bottom: 0;
+}
+
+header {
+    z-index: 1000;
+    position: relative;
+    
+}
+
+.Logo img {
+    margin-right: 40px;
+    width: 106px;
+    height: 60px;
+    margin-left: 50px;
+    
+}
+
+.navbar-expand-lg  {
+height: 80px;
+}
+.TamañoForm{
+    width: 559px;
+    height: 55px;
+}
+
+.AjusteForm  {
+    display: flex;
+    align-items: center; 
+}
+
+.AjusteForm .TamañoForm {
+    margin-right: 10px; 
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.ml-auto {
+    margin-left: auto ;
+}
+
+.mr-auto {
+    margin-right: auto ;
+}
+
+.navbar form {
+    margin-left: 250px;
+    justify-content: right;
+}
+
+.navbar-nav a {
+margin-right: 10px;
+}
+
+
+.boton1 {
+    width: 190.93px;
+    height: 50px;
+    font-size: 13px;
+    left: 0px;
+    top: 0px;
+    font-weight: 700;
+    background: #1D1F2D;
+    color: white;
+}
+
+.MargenAjuste {
+    padding-right: 50px;
+}
+
+.Subrayado {
+    text-decoration: none;
+}
+
+
+.Subrayado:hover {
+    text-decoration: underline; 
+}

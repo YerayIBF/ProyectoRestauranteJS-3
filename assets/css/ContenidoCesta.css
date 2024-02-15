@@ -1,0 +1,66 @@
+
+* { 
+    font-family: Montserrat,arial;
+ }
+ 
+ body {
+    
+     width: 100%;
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;  
+ }
+ 
+ a {
+     text-decoration: none;
+ }
+
+ #SeccionProductos .card {
+    border: none;
+    max-width: 450px;
+    margin: 0px 10px 0px 10px;
+    height: 443px;
+    border: 2px solid transparent;
+}
+
+#SeccionProductos h2 {
+text-align: center;
+margin-top: 50px;
+font-size: 20px;
+font-weight: 700;
+margin-bottom: 25px;
+}
+
+#SeccionProductos .card:hover {
+    border-color: #1D1F2D;
+    
+}
+
+#SeccionProductos .boton1 {
+    width: 308px;
+    height: 42px;
+    text-align: center;
+}
+
+.Contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.boton1 {
+    width: 190.93px;
+    height: 50px;
+    font-size: 13px;
+    left: 0px;
+    top: 0px;
+    font-weight: 700;
+    background: #1D1F2D;
+    color: white;
+}
+
+
+.boton1:hover {
+    background: #20274B;
+}
+

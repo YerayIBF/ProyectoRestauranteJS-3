@@ -1,0 +1,27 @@
+/**
+--------------------------------------------
+           Seccion del footer
+--------------------------------------------
+*/
+footer {
+    margin-top: 50PX;
+    background-color: #1D1F2D;
+    color: white;
+}
+
+footer ul li {
+   margin:  0px 20px 0px 20px; 
+}
+footer p {
+    margin:  0px 20px 0px 20px; 
+ }
+.Contenedor3{
+    display: flex;
+    justify-content: space-between;
+   
+}
+/**
+--------------------------------------------
+*/
+
+
