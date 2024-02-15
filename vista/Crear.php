@@ -13,6 +13,21 @@
     <link href="../assets/css/full_estil.css" rel="stylesheet" type="text/css" media="screen">
     <link href="../assets/css/ContenidoCarta.css" rel="stylesheet" type="text/css" media="screen">
 </head>
-
-
 <body>
+<body>
+    <form action="<?= url_base . '?controller=Producto&action=crearproducto' ?>" method="POST">
+        <label for="nombre">Nombre del Producto:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br>
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" required>
+        <br>
+        <label for="imagen_nombre">Nombre de la Imagen:</label>
+        <input type="text" id="imagen_nombre" name="imagen_nombre" required>
+        <br>
+        <button type="submit">Crear Producto</button>
+    </form>
+</body>
+
+</body>
+</html>

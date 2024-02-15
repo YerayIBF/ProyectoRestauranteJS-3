@@ -1,5 +1,5 @@
- <!--Header-->
- <!DOCTYPE html PUBLIC>
+<!--Header-->
+<!DOCTYPE html PUBLIC>
 <html>
 
 <head>
@@ -43,10 +43,13 @@
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item active ml-auto">
-                            <a class="nav-link  Subrayado   " href="../vista/Home.php">Home</a>
+                            <a class="nav-link  Subrayado   " href="<?= url_base . '?controller=Producto&action=homemostrar'?>">Home</a>
                         </li>
                         <li class="nav-item ml-auto">
-                            <a class="nav-link  Subrayado   " href="../vista/Carta.php">Carta</a>
+                            <a class="nav-link  Subrayado   " href="<?= url_base . '?controller=Producto&action=cartamostrar'?>">Carta</a>
+                        </li>
+                        <li class="nav-item ml-auto">
+                        <a class="nav-link  Subrayado" href="<?= url_base . '?controller=Producto&action=reseñasmostrar'?>">Reseñas</a>
                         </li>
                 
                     <form class="AjusteForm form-inline my-2 my-lg-0">
@@ -57,10 +60,10 @@
                    
                     <ul class="navbar-nav ml-auto MargenAjuste">
                         <li class="nav-item">
-                            <a class="nav-link " href="../vista/Login.php"><img src="../assets/icons/usuario.png" width="20px" height="20PX"></a>
+                            <a class="nav-link " href="<?= url_base . '?controller=Producto&action=loginmostrar'?>"><img src="../assets/icons/usuario.png" width="20px" height="20px"></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  Subrayado  " href="../vista/Cesta.php"><img src="../assets/icons/Bolsa.png" width="20px" height="20PX"></a>
+                            <a class="nav-link  Subrayado  " href="<?= url_base . '?controller=Producto&action=cestamostrar'?>"><img src="../assets/icons/cesta.png" width="30px" height="30PX"></a>
                         </li>
                      </ul>
 

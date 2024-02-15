@@ -97,7 +97,7 @@ height: 80px;
 }
 
 .navbar form {
-    margin-left: 250px;
+    margin-left: 190px;
     justify-content: right;
 }
 
@@ -117,9 +117,7 @@ margin-right: 10px;
     color: white;
 }
 
-.MargenAjuste {
-    padding-right: 50px;
-}
+
 
 .Subrayado {
     text-decoration: none;

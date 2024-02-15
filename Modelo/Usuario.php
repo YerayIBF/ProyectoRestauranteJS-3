@@ -1,7 +1,7 @@
 <?php
-include_once __DIR__ . '/../config/database.php';
-include_once __DIR__ . '/../controlador/ProductoController.php';
-include_once __DIR__ . '/../modelo/UsuarioDAO.php';
+include_once 'config/database.php';
+include_once 'controlador/ProductoController.php';
+include_once 'UsuarioDAO.php';
 
 class Usuario {
     protected $ID_Usuario;
@@ -9,12 +9,15 @@ class Usuario {
     protected $Correo;
     protected $Contraseña;
     protected $Rol;
-    public function __construct($ID_Usuario = null, $Nombre = null, $Correo = null, $Contraseña = null, $Rol = null) {
+    protected $Puntos;
+    
+    public function __construct($ID_Usuario = null, $Nombre = null, $Correo = null, $Contraseña = null, $Rol = null, $Puntos = null) {
         $this->ID_Usuario = $ID_Usuario;
         $this->Nombre = $Nombre;
         $this->Correo = $Correo;
         $this->Contraseña = $Contraseña;
         $this->Rol = $Rol;
+        $this->$Puntos = $Puntos;
     }
 
     /**
@@ -113,6 +116,26 @@ class Usuario {
     public function setRol($Rol)
     {
         $this->Rol = $Rol;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of Puntos
+     */ 
+    public function getPuntos()
+    {
+        return $this->Puntos;
+    }
+
+    /**
+     * Set the value of Puntos
+     *
+     * @return  self
+     */ 
+    public function setPuntos($Puntos)
+    {
+        $this->Puntos = $Puntos;
 
         return $this;
     }

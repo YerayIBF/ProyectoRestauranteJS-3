@@ -16,8 +16,22 @@
 
 
 <body>
-    <!--Seccion del header (Incluimos el header con un "include" para poder quitar lineas de codigo y tener todo mas ordenado).--> 
-    <?php include 'header.php';?>
+
+<?php foreach ($cesta as $productoencesta) : ?>
+    <p>
+        <?= $productoencesta->getNombre(); ?> 
+        <?= $productoencesta->getPrecio(); ?> 
+        <?= $productoencesta->cantidad; ?> 
+        <a href="<?= url_base . '?controller=Producto&action=eliminarproductocesta&producto_id=' . $productoencesta->getID_Producto(); ?>">Eliminar</a>
+    </p>
+<?php endforeach; ?>
+
+<p>Precio Total: <?= $precioTotal; ?> €</p>
+
+<!-- Agregar un formulario para finalizar el pedido -->
+<form action="<?= url_base . '?controller=Producto&action=finalizarPedido' ?>" method="POST">
+    <button type="submit" class="boton1">Finalizar Pedido</button>
+</form>
 
 
     <section id="SeccionProductos">
@@ -58,8 +72,7 @@
             </div>
         </section>
         
-    <!--Seccion Footer (Incluimos el footer con un "include" para poder quitar lineas de codigo y tener todo mas ordenado).-->
-    <?php include 'footer.php';?>
+
 </body>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 

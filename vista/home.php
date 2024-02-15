@@ -16,7 +16,7 @@
 
     <body>
         <!--Seccion del header (Incluimos el header con un "include" para poder quitar lineas de codigo y tener todo mas ordenado).-->
-        <?php include 'header.php';?>
+       
         <main>
             <!--Seccion del banner-->
             <section id="Banner">
@@ -208,7 +208,7 @@
             </section>
         </main>
         <!--Seccion Footer (Incluimos el footer con un "include" para poder quitar lineas de codigo y tener todo mas ordenado).-->
-        <?php include 'footer.php';?>
+
     </body>
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
 

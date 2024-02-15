@@ -1,17 +1,19 @@
 <?php
-include_once __DIR__ . '/../config/database.php';
+include_once 'config/database.php';
 class Producto {
     public $ID_Producto;
     public $nombre;
     public $precio;
     public $img;
+    public $categoria; 
 
     // Constructor
-    public function __construct($ID_Producto, $nombre, $precio, $img) {
+    public function __construct($ID_Producto, $nombre, $precio, $img, $categoria) {
         $this->ID_Producto = $ID_Producto;
         $this->nombre = $nombre;
         $this->precio = $precio;
         $this->img = $img;
+        $this->categoria = $categoria; 
     }
     
 
@@ -91,6 +93,26 @@ class Producto {
     public function setID_Producto($ID_Producto)
     {
         $this->ID_Producto = $ID_Producto;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of categoria
+     */ 
+    public function getCategoria()
+    {
+        return $this->categoria;
+    }
+
+    /**
+     * Set the value of categoria
+     *
+     * @return  self
+     */ 
+    public function setCategoria($categoria)
+    {
+        $this->categoria = $categoria;
 
         return $this;
     }

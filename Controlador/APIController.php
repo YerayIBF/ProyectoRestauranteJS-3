@@ -1,47 +1,31 @@
 <?php
-//Esto es un NUEVO CONTROLADOR
-//hacer todas las configuraciones necesarias para que funcione como controlador
-
-/** IMPORTANTE**/
-//Cargar Modelos necesarios BBDD
-
-/** IMPORTANTE**/
-//Instala la extensión Thunder Client en VSC. Te permite probar si tu API funciona correctamente.
-
+include_once 'modelo/Reseña.php';
+include_once 'modelo/ReseñasDAO.php';
 
 class APIController{    
- 
-    public function api(){
-       
-        if($_POST["accion"] == 'buscar_pedido'){
-
-            $id_usuario = json_decode($_POST["id_usuario"]); //se decodifican los datos JSON que se reciben desde JS
-            $pedidos = xxxxxxxxxxx; //puedes hacer un select de pedidos aqui, o un insert o lo que quieras, utilizando el MODELO
+    
+    public function index() {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $accion = $_GET["action"];
             
-            // Si quieres devolverle información al JS, codificas en json un array con la información
-            // y se los devuelves al JS
-            echo json_encode($pedidos, JSON_UNESCAPED_UNICODE) ; 
-            return; //return para salir de la funcion
-
-        }else if($_POST["accion"] == 'add_review'){
-
-            $id_pedido = json_decode($_POST["pedido"]); //se decodifican los datos JSON que se reciben desde JS
-            $id_usuario = json_decode($_POST["id_usuario"]); //se decodifican los datos JSON que se reciben desde JS
-            
-            /*
-
-                Otras operaciones
-
-            */
-            
-            return;
+            if ($accion == 'buscar_reseñas') {
+                $resultado = $this->buscarReseñas();
+                echo  json_encode($resultado);
+      
+            }
         }
     }
-    private function agregarReview($id_pedido, $id_usuario) {
-      
-    }
     
-    private function buscarPedidos($id_usuario) {
-
+    private function buscarReseñas() {
+        try {
+            $reseñas = ReseñasDAO::MostrarReseñas();
+            
+            return $reseñas;
+        } catch (Exception $e) {
+            echo "Error al buscar reseñas: " . $e->getMessage();
+            return array(); // Devuelve un array vacío en caso de error
+        }
     }
 }
+
+?>
