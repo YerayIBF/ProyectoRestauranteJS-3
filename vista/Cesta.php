@@ -12,26 +12,47 @@
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/full_estil.css" rel="stylesheet" type="text/css" media="screen">
     <link href="../assets/css/ContenidoCesta.css" rel="stylesheet" type="text/css" media="screen">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
 </head>
 
 
 <body>
 
-<?php foreach ($cesta as $productoencesta) : ?>
-    <p>
-        <?= $productoencesta->getNombre(); ?> 
-        <?= $productoencesta->getPrecio(); ?> 
-        <?= $productoencesta->cantidad; ?> 
-        <a href="<?= url_base . '?controller=Producto&action=eliminarproductocesta&producto_id=' . $productoencesta->getID_Producto(); ?>">Eliminar</a>
-    </p>
-<?php endforeach; ?>
 
-<p>Precio Total: <?= $precioTotal; ?> €</p>
-
-<!-- Agregar un formulario para finalizar el pedido -->
-<form action="<?= url_base . '?controller=Producto&action=finalizarPedido' ?>" method="POST">
+<table>
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($cesta as $producto) : ?>
+            <tr>
+                <td><img src="../assets/images/<?= $producto->getImg(); ?>" alt="<?= $producto->getNombre(); ?>" width="145" height="150"></td>
+                <td><?= $producto->getNombre(); ?></td>
+                <td><?= $producto->getPrecio() * $producto->getCantidad(); ?> €</td>
+                <td>Cantidad: <?= $producto->getCantidad(); ?></td> <!-- Agregar esta línea para mostrar la cantidad -->
+                <td>
+                <form action="<?= url_base . '?controller=Producto&action=eliminarproductocesta' ?>" method="POST">
+                    <input type="hidden" name="producto_id" value="<?= $producto->getID_Producto(); ?>">
+                    <button type="submit">Eliminar</button>
+                </form>
+            </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <!-- Agregar un formulario para finalizar el pedido -->
+    <form action="<?= url_base . '?controller=Producto&action=finalizarPedido' ?>" method="POST">
     <button type="submit" class="boton1">Finalizar Pedido</button>
 </form>
+
+<p>Precio Total: <?= $totalCompra; ?> €</p>
+
+<!-- Agregar un formulario para finalizar el pedido -->
+
 
 
     <section id="SeccionProductos">
@@ -72,8 +93,9 @@
             </div>
         </section>
         
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/notie"></script>
 
 </body>
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
 
 </html>

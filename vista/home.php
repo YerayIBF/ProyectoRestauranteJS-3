@@ -35,7 +35,7 @@
                                 <h1>RESTAURANTE</h1>
                                 <p class="text-start ms-0">Ven a disfrutar en familia de nuestros <br> menus con los mas
                                     pequeños de la casa!.</p>
-                                <a href="../vista/Carta.php"> <button class="boton1">VER CARTA</button></a>
+                                <a href="<?= url_base . '?controller=Producto&action=cartamostrar'?>"> <button class="boton1">VER CARTA</button></a>
                             </div>
                             <img src="../assets/images/Restaurante.png" class="d-block ajusteImgBan" width="850px"
                                 height="535px" alt="restaurente">
@@ -45,7 +45,7 @@
                                 <h1>RESTAURANTE</h1>
                                 <p class="text-start ms-0">Ven a disfrutar en familia de nuestros <br> menus con los mas
                                     pequeños de la casa!.</p>
-                                <a href="../vista/Carta.php"> <button class="boton1">VER CARTA</button></a>
+                                <a href="<?= url_base . '?controller=Producto&action=cartamostrar'?>"> <button class="boton1">VER CARTA</button></a>
                             </div>
                             <img src="../assets/images/ImagenBanner.webp." class="d-block ajusteImgBan" width="850px"
                                 height="535px" alt="restaurente">
@@ -207,7 +207,7 @@
                 </div>
             </section>
         </main>
-        <!--Seccion Footer (Incluimos el footer con un "include" para poder quitar lineas de codigo y tener todo mas ordenado).-->
+     
 
     </body>
     <script src="../assets/js/bootstrap.bundle.min.js"></script>

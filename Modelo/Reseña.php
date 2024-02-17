@@ -130,11 +130,8 @@ class Reseña {
      *
      * @return  self
      */ 
-    public function setID_Reseña($ID_Reseña)
-    {
+    public function setID_Reseña($ID_Reseña) {
         $this->ID_Reseña = $ID_Reseña;
-
-        return $this;
     }
 }
 ?>

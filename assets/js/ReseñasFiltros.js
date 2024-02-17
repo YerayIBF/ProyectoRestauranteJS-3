@@ -1,6 +1,9 @@
 let reseñasFiltradas = []; 
 
-document.addEventListener('DOMContentLoaded', obtenerReseñas);
+document.addEventListener('DOMContentLoaded', () => {
+    obtenerReseñas();
+    reseñasFiltradas = [reseñas]; 
+});
 document.getElementById('filtro-valoracion').addEventListener('change', filtrarReseñas);
 document.getElementById('orden-ascendente').addEventListener('click', ordenarReseñasAscendente);
 document.getElementById('orden-descendente').addEventListener('click', ordenarReseñasDescendente);

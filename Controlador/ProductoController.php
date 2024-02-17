@@ -98,19 +98,18 @@ class ProductoController{
     }
 
     public function cartamostrar() {
-
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
-            $rolUsuario = isset($_SESSION['rolUsuario']) ? $_SESSION['rolUsuario'] : '';
+            $rolUsuario = isset($_SESSION['Rol']) ? $_SESSION['Rol'] : '';
         }
-        
+        $carrito = isset($_SESSION['carrito']) ? $_SESSION['carrito'] : array();
         include_once 'modelo/ProductoDAO.php';
         $productos = ProductoDAO::getAllProducts();
         include_once 'vista/header.php';
         include_once 'vista/carta.php';
         include_once 'vista/footer.php';
     }
-
+    
     public function  homemostrar() {
         include_once 'vista/header.php';
         include_once 'vista/home.php';
@@ -134,12 +133,17 @@ class ProductoController{
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
+
+
         $cesta = isset($_SESSION['cesta']) ? $_SESSION['cesta'] : array();
 
-        $precioTotal = 0;
-        foreach ($cesta as $producto) {
-            $precioTotal += $producto->getPrecio();
-        }
+       
+         $totalCompra = 0;
+    foreach ($cesta as $producto) {
+        $totalProducto = $producto->getPrecio() * $producto->getCantidad();
+        $totalCompra += $totalProducto;
+    }
+
         include_once 'vista/header.php';
         include_once 'vista/cesta.php';
         include_once 'vista/footer.php';
@@ -204,94 +208,133 @@ class ProductoController{
     }
 
 
+  
+
+    public function eliminarproductocesta() {
+        session_start(); // Iniciar la sesión si aún no se ha iniciado
+        
+        // Verificar si la sesión y la variable de la cesta están definidas y son un array
+        if (isset($_SESSION['cesta']) && is_array($_SESSION['cesta'])) {
+            // Obtener el ID del producto a eliminar
+            if (isset($_POST["producto_id"])) {
+                $producto_id = $_POST["producto_id"];
+    
+                // Buscar el índice del producto en el array de la cesta
+                $index = array_search($producto_id, array_column($_SESSION['cesta'], 'ID_Producto'));
+    
+                // Verificar si se encontró el producto en la cesta
+                if ($index !== false) {
+                    // Eliminar el producto de la cesta
+                    unset($_SESSION['cesta'][$index]);
+                    header("Location: " . url_base . '?controller=Producto&action=cestamostrar');
+                    exit(); 
+                } 
+            } 
+        } 
+    }
+        
+    
+
+    public function agregarcesta() {
+      
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+  
+        if (!isset($_SESSION['ID_Usuario'])) {
+            header("Location: " . url_base . '?controller=Producto&action=loginmostrar');
+            exit();
+        }
+        if (isset($_POST["producto_id"])) {
+            $producto_id = $_POST["producto_id"];
+            
+            // Obtener el producto desde la base de datos usando el ID
+            $producto = ProductoDAO::getProductoByID($producto_id);
+    
+            if ($producto != null) {
+                // Inicializar la cesta si no existe en la sesión
+                if (!isset($_SESSION['cesta'])) {
+                    $_SESSION['cesta'] = array();
+                }
+    
+                // Verificar si el producto ya está en la cesta
+                $producto_encontrado = false;
+                foreach ($_SESSION['cesta'] as $indice => $item) {
+                    if ($item->getID_Producto() == $producto_id) {
+                        // El producto ya está en la cesta, aumentar su cantidad
+                        $_SESSION['cesta'][$indice]->setCantidad($item->getCantidad() + 1);
+                        $producto_encontrado = true;
+                        break;
+                    }
+                }
+    
+                // Si el producto no estaba en la cesta, agregarlo con cantidad 1
+                if (!$producto_encontrado) {
+                    $producto->setCantidad(1); // Cantidad predeterminada
+                    $_SESSION['cesta'][] = $producto;
+                }
+                
+            
+
+                header("Location: " . url_base . '?controller=Producto&action=cartamostrar');
+                exit();
+            } else {
+                echo "Error: Producto no encontrado.";
+            }
+        } else {
+            echo "Error: No se ha proporcionado el ID del producto.";
+        }
+    }
+
+    
     public function finalizarPedido() {
-        // Iniciar la sesión si no está iniciada
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
     
-        // Obtener el carrito de la sesión
-        $carrito = isset($_SESSION['cesta']) ? $_SESSION['cesta'] : array();
+        // Verificar si el usuario está autenticado
+        if (!isset($_SESSION['ID_Usuario'])) {
+            // Redirigir al usuario a iniciar sesión si no lo está
+            header("Location: " . url_base . '?controller=Producto&action=loginmostrar');
+            exit();
+        }
+    
+        // Obtener el ID de usuario de la sesión
+        $usuarioID = $_SESSION['ID_Usuario'];
     
         // Verificar si hay productos en el carrito
-        if (count($carrito) > 0) {
-           
-            $usuario_id = isset($_SESSION['ID_Usuario']) ? $_SESSION['ID_Usuario'] : null;
+        if (!isset($_SESSION['cesta']) || empty($_SESSION['cesta'])) {
+            echo "Error: No hay productos en el carrito.";
+            exit();
+        }
     
-      
-            $pedidoGuardado = PedidoDAO::guardarPedido($usuario_id, $carrito);
+        try {
+            // Guardar el pedido en la base de datos
+            $pedidoDAO = new PedidoDAO();
+            $pedido = $pedidoDAO->guardarpedido($usuarioID, $_SESSION['cesta']);
     
-            // Limpiar el carrito después de finalizar el pedido
-            unset($_SESSION['cesta']);
+            if ($pedido) {
+                // Eliminar los productos del carrito
+                unset($_SESSION['cesta']);
     
-            if ($pedidoGuardado) {
-                echo "Pedido finalizado con éxito.";
+                // Redirigir a una página de confirmación de compra o a otra ubicación
+                header("Location: " . url_base . '?controller=Producto&action=confirmacionCompra');
+                exit();
             } else {
-                echo "Error al finalizar el pedido.";
+                echo "Error al guardar el pedido.";
+                exit();
             }
-        } else {
-            echo "El carrito está vacío. Añade productos antes de finalizar el pedido.";
+        } catch (Exception $e) {
+            echo "Error al finalizar la compra: " . $e->getMessage();
+            exit();
         }
-    }    
+    }
         
-
-    public function eliminarproductocesta() {
-     
-        $producto_id = $_POST["producto_id"];
     
-        // Obtener el carrito de las cookies
-        $carrito = isset($_COOKIE['cesta']) ? unserialize($_COOKIE['cesta']) : array();
-
-        foreach ($carrito as $key => $productoEnCarrito) {
-            if ($productoEnCarrito->getID_Producto() == $producto_id) {
-                unset($carrito[$key]);
-                break;
-            }
-        }
-    
-        
-        setcookie('carrito', serialize($carrito), time() + (86400 * 30), "/"); // Caducidad de 30 días
-    
-      
-        header("Location: " . url_base . '?controller=Producto&action=cestamostrar');
-        exit();
-    }
-
-    public function agregarcesta() {
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["producto_id"])) {
-          // Obtener el ID del producto que se va a añadir al carrito
-    $producto_id = $_POST["producto_id"];
-
-    // Obtener detalles del producto (por ejemplo, de la base de datos)
-    $producto = ProductoDAO::getProductoByID($producto_id);
-
-    // Obtener el carrito de las cookies
-    $cesta = isset($_COOKIE['cesta']) ? unserialize($_COOKIE['cesta']) : array();
-
-    // Verificar si el producto ya está en el carrito
-    $productoexistente = false;
-    foreach ($cesta as &$productoencesta) {
-        if ($productoencesta->getID_Producto() == $producto->getID_Producto()) {
-            // Incrementar la cantidad si el producto ya está en el carrito
-            $productoencesta['cantidad']++;
-            $productoexistente = true;
-            break;
-        }
-    }
-
-    // Si el producto no está en el carrito, añadirlo con cantidad 1
-  
-
-    // Guardar el carrito actualizado en las cookies
-    setcookie('cesta', serialize($cesta), time() + (86400 * 30), "/"); 
-    // Redirigir a la página de la carta
-    header("Location: " . url_base . '?controller=Producto&action=cartamostrar');
-    exit();
-}
-    }
+       
 }
 
 
-        
+
         
     ?>

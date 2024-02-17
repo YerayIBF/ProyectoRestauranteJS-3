@@ -26,7 +26,33 @@ while ($fila = $resultado->fetch_assoc()) {
 $conexion->close();
 return $reseñas;
     }
+
+
+    public static function insertarReseña(Reseña $reseña) {
+        
+        
+        $conexion = DataBase::connect();
+    
+        // Preparar la consulta con sentencias preparadas
+        $query = "INSERT INTO reseñas (Titulo, Comentario, Valoracion, Usuario, Pedido) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $conexion->prepare($query);
+        
+        // Vincular parámetros
+        $stmt->bind_param("ssiii", $reseña->getTitulo(), $reseña->getComentario(), $reseña->getValoracion(), $reseña->getUsuario(), $reseña->getPedido());
+        
+        // Ejecutar la consulta
+        if ($stmt->execute()) {
+            $stmt->close();
+            $conexion->close();
+            return true;
+        } else {
+            $stmt->close();
+            $conexion->close();
+            return false;
+        }
+    }
 }
 ?>
+
 
 

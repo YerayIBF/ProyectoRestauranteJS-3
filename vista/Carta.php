@@ -35,11 +35,17 @@
             <p>Mostrar filtros <img class="rotar-flechas" src="../assets/icons/downarrowDer.png"></p>
 
             <div id="filtros">
-                <label for="filtro-adultos">Para adultos:</label>
-                <input type="checkbox" id="filtro-adultos" class="filtro-categoria" value="1">
+                <label for="filtro-adultos">Pasta/Pizza:</label>
+                <input type="checkbox" id="PastaPiz" class="filtro-categoria" value="1">
 
-                <label for="filtro-infantil">Para peques:</label>
-                <input type="checkbox" id="filtro-infantil" class="filtro-categoria" value="2">
+                <label for="filtro-infantil">Carnes</label>
+                <input type="checkbox" id="Carnes" class="filtro-categoria" value="2">
+
+                <label for="filtro-infantil">Pescado/Marisco</label>
+                <input type="checkbox" id="Pescado/Marisco" class="filtro-categoria" value="3">
+
+                <label for="filtro-infantil">Platos con verdura</label>
+                <input type="checkbox" id="PlatosVerduras" class="filtro-categoria" value="4">
             </div>
             <p>Ordenar por: <b><span class="marginTexto">Más popular</span></b><img class="rotar-flechas"
                     src="../assets/icons/downarrowDer.png"></p>
@@ -74,9 +80,9 @@
                             </form>
                             <?php endif; ?>
 
-                            <form action="<?= url_base . '?controller=Producto&action=agregarcesta' ?>" method="POST">
+                            <form action=<?= url_base . '?controller=Producto&action=agregarcesta'?> method="POST">
                                 <input type="hidden" name="producto_id" value="<?= $producto->getID_Producto(); ?>">
-                                <button class="boton1  mt-auto">AÑADIR PRODUCTO</button>
+                                <button type="submit" class="boton1  mt-auto">AÑADIR PRODUCTO</button>
                             </form>
 
                         </div>
@@ -98,6 +104,7 @@
     <!--Seccion Footer (Incluimos el footer con un "include" para poder quitar lineas de codigo y tener todo mas ordenado).-->
 <script src="../assets/js/ProductoFiltros.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/notie"></script>
 </body>
 
 

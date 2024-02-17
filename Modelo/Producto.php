@@ -6,6 +6,7 @@ class Producto {
     public $precio;
     public $img;
     public $categoria; 
+    public $cantidad;
 
     // Constructor
     public function __construct($ID_Producto, $nombre, $precio, $img, $categoria) {
@@ -14,9 +15,23 @@ class Producto {
         $this->precio = $precio;
         $this->img = $img;
         $this->categoria = $categoria; 
+        $this->cantidad = 0;
+
     }
     
+ 
 
+public function incrementarCantidad() {
+    $this->cantidad++;
+}
+
+public function getCantidad() {
+    return $this->cantidad;
+}
+
+public function setCantidad($cantidad) {
+    $this->cantidad = $cantidad;
+}
     /**
      * Get the value of img
      */ 
