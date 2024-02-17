@@ -217,23 +217,20 @@ class ProductoController{
         if (isset($_SESSION['cesta']) && is_array($_SESSION['cesta'])) {
             // Obtener el ID del producto a eliminar
             if (isset($_POST["producto_id"])) {
-                $producto_id = $_POST["producto_id"];
-    
-                // Buscar el índice del producto en el array de la cesta
-                $index = array_search($producto_id, array_column($_SESSION['cesta'], 'ID_Producto'));
-    
-                // Verificar si se encontró el producto en la cesta
-                if ($index !== false) {
-                    // Eliminar el producto de la cesta
-                    unset($_SESSION['cesta'][$index]);
-                    header("Location: " . url_base . '?controller=Producto&action=cestamostrar');
-                    exit(); 
-                } 
-            } 
-        } 
+                $producto_id = (int)$_POST["producto_id"]; // Convertir a entero
+                
+                // Buscar el índice del producto en la cesta
+                foreach ($_SESSION['cesta'] as $indice => $producto) {
+                    if ($producto->getID_Producto() === $producto_id) {
+                        // Eliminar el producto de la cesta
+                        unset($_SESSION['cesta'][$indice]);
+                        header("Location: " . url_base . '?controller=Producto&action=cestamostrar');
+                        exit(); 
+                    } 
+                }        
+            }
+        }
     }
-        
-    
 
     public function agregarcesta() {
       
@@ -318,20 +315,16 @@ class ProductoController{
                 unset($_SESSION['cesta']);
     
                 // Redirigir a una página de confirmación de compra o a otra ubicación
-                header("Location: " . url_base . '?controller=Producto&action=confirmacionCompra');
-                exit();
-            } else {
-                echo "Error al guardar el pedido.";
+                header("Location: " . url_base . '?controller=api&action=MostrarPedidoFinalizado');
                 exit();
             }
+            
         } catch (Exception $e) {
             echo "Error al finalizar la compra: " . $e->getMessage();
             exit();
         }
     }
         
-    
-       
 }
 
 

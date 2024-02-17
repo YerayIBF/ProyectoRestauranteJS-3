@@ -81,5 +81,38 @@ class UsuarioDAO {
     
       
     }
+    public static function obtenerPuntosCliente($usuarioID) {
+        try {
+            $conexion = DataBase::connect();
+            $query = "SELECT Puntos FROM usuarios WHERE ID_Usuario = ?";
+            $stmt = $conexion->prepare($query);
+            $stmt->bind_param("i", $usuarioID);
+            $stmt->execute();
+            $stmt->bind_result($puntos);
+            $stmt->fetch();
+            $conexion->close();
+            return $puntos;
+        } catch (Exception $e) {
+            echo "Error al obtener los puntos del cliente: " . $e->getMessage();
+            return 0; 
+        }
+    }
+
+    public static function actualizarPuntosCliente($usuarioID, $nuevosPuntos) {
+        try {
+            $conexion = DataBase::connect();
+            $query = "UPDATE usuarios SET Puntos = ? WHERE ID_Usuario = ?";
+            $stmt = $conexion->prepare($query);
+            $stmt->bind_param("ii", $nuevosPuntos, $usuarioID);
+            $stmt->execute();
+            $conexion->close();
+            return true;
+        } catch (Exception $e) {
+            echo "Error al actualizar los puntos del cliente: " . $e->getMessage();
+            return false;
+        }
+    }
 }
+
+
 ?>

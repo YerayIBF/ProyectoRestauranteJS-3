@@ -1,0 +1,45 @@
+.boton1 {
+    width: 190.93px;
+    height: 50px;
+    font-size: 13px;
+    left: 0px;
+    top: 0px;
+    font-weight: 700;
+    background: #1D1F2D;
+    color: white;
+}
+.reseñasContenedor {
+    justify-content: center;
+}
+
+.filtro-valoracion {
+    margin-bottom: 20px;
+}
+
+.filtro-valoracion label {
+    font-family: Monstserrat, sans-serif;
+    font-size: 16px;
+    color: #333;
+    margin-right: 10px;
+}
+
+.filtro-valoracion select {
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+    color: #333;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.ContenedorReseñas{
+
+}
+
+.contenedor-general {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}

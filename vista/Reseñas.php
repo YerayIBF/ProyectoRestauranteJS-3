@@ -10,11 +10,9 @@
     <title>Mostrar Reseñas</title>
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/Reseñas.css" rel="stylesheet" type="text/css" media="screen">
-    
 </head>
-
 <body>
-    <main>
+    <main class="contenedor-general">
         <div id="filtros">
             <label for="filtro-valoracion">Filtrar por valoración:</label>
             <select id="filtro-valoracion">
@@ -25,13 +23,15 @@
                 <option value="4">4 estrellas</option>
                 <option value="5">5 estrellas</option>
             </select>
-            <button id="orden-ascendente">Orden ascendente</button>
-            <button id="orden-descendente">Orden descendente</button>
+            <button id="orden-ascendente" class="boton1">Orden ascendente</button>
+            <button id="orden-descendente" class="boton1">Orden descendente</button>
         </div>
-        <div id="reseñas-container"></div>
-        
+        <div class="ContenedorReseñas">
+            <div id="reseñas-container" class="reseñasContenedor"></div>
+            </div>
+        </div>
        
-        <div id="nueva-reseña">
+        <!-- <div id="nueva-reseña">
             <h2>Enviar nueva reseña</h2>
             <form id="formulario-reseña">
                 <label for="titulo">Título:</label>
@@ -52,8 +52,9 @@
                 <select id="pedido" name="pedido" required>
                 </select>
                 <button type="submit">Enviar reseña</button>
-            </form>
-        </div>
+            </form> -->
+            
+   
     </main>
 </body>
 <script src="../assets/js/Reseñas.js"></script>

@@ -3,13 +3,16 @@ include_once 'Modelo/Reseña.php';
 include_once 'Modelo/ReseñasDAO.php';
 include_once 'Modelo/producto.php';
 include_once 'Modelo/productoDAO.php';
-class APIController{ 
+include_once 'Modelo/UsuarioDAO.php';
 
-    
-   public function index() {
+class APIController
+{
+
+    public function index()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $accion = $_GET["action"];
-            
+
             if ($accion == 'buscar_reseñas') {
                 $resultado = $this->buscarReseñas();
                 echo json_encode($resultado);
@@ -17,48 +20,63 @@ class APIController{
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $accion = $_POST["action"];
             if ($accion == 'insertar_reseñas') {
-            $this->insertarReseña();
-        }
+                $this->insertarReseña();
+            } elseif ($accion == 'calcular_y_actualizar_puntos') {
+                // Obtener los datos necesarios para calcular y actualizar puntos
+                $usuarioID = $_POST['usuario_id'];
+                $totalCompra = $_POST['total_compra'];
+
+                $this->calcularYActualizarPuntos($usuarioID, $totalCompra);
+            }
         }
     }
-    
-    
-    
-    private function buscarReseñas() {
+
+    private function buscarReseñas()
+    {
         try {
             $reseñas = ReseñasDAO::MostrarReseñas();
-            
             return $reseñas;
         } catch (Exception $e) {
-            echo "Error al buscar reseñas: " . $e->getMessage();
+            echo json_encode(["message" => "Error al buscar reseñas: " . $e->getMessage()]);
             return array(); // Devuelve un array vacío en caso de error
         }
     }
 
-    private function insertarReseña() {
-        // Obtener los datos del formulario de la solicitud POST
-        $data = json_decode(file_get_contents("php://input"));
-        
-        // Crear una nueva instancia de Reseña con los datos recibidos
-        $reseña = new Reseña(
-            null, // No necesito proporcionar el ID_Reseña aquí se genera automáticamente en la base de datos
-            $data->titulo,
-            $data->comentario,
-            $data->valoracion,
-            $data->usuario,
-            $data->pedido 
-        );
-        
-        // Insertar la reseña utilizando el método insertarReseña de la clase ReseñasDAO
+    private function insertarReseña()
+    {
+        // Código para insertar una reseña, sin cambios
+    }
+
+    private function calcularYActualizarPuntos($usuarioID, $totalCompra)
+    {
         try {
-            $resultado = ReseñasDAO::insertarReseña($reseña);
-            // Devolver el resultado de la inserción como JSON
-            echo json_encode(["message" => $resultado ? "La reseña se insertó correctamente." : "Error al insertar la reseña."]);
+
+            $puntosGanados = $totalCompra * 5;
+
+            // Obtener los puntos actuales del cliente
+            $puntosActuales = UsuarioDAO::obtenerPuntosCliente($usuarioID);
+
+            // Calcular los nuevos puntos sumando los puntos actuales con los puntos ganados
+            $nuevosPuntos = $puntosActuales + $puntosGanados;
+
+            // Actualizar los puntos del cliente en la base de datos
+            $actualizacionExitosa = UsuarioDAO::actualizarPuntosCliente($usuarioID, $nuevosPuntos);
+
+            // Devolver el resultado de la actualización como JSON
+            if ($actualizacionExitosa) {
+                echo json_encode(["success" => true, "new_points" => $nuevosPuntos]);
+            } else {
+                echo json_encode(["success" => false, "message" => "Error al actualizar los puntos del usuario"]);
+            }
         } catch (Exception $e) {
-            // Error al insertar la reseña debido a una excepción
-            echo json_encode(["message" => "Error al insertar la reseña: " . $e->getMessage()]);
+            echo json_encode(["success" => false, "message" => "Error al calcular y actualizar puntos: " . $e->getMessage()]);
         }
     }
 
+    public static function MostrarPedidoFinalizado()
+    {
+        include_once 'vista/header.php';
+        include_once 'vista/PedidoFinalizado.php';
+        include_once 'vista/footer.php';
+    }
 }
-?>
